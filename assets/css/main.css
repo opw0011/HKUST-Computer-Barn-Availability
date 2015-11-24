@@ -1,0 +1,17 @@
+/*nav bar*/
+.navbar-default {
+	background-color: #FFF;
+}
+
+.progress {
+	background-color: #BF3500;
+}
+
+/* computer icon in barn_view */
+.icon_comp {
+	max-width: 64px;	
+}
+
+.tooltip.tooltip-custom .tooltip-inner{
+	max-width: 300px;
+}
