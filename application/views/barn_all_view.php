@@ -40,4 +40,53 @@
 			</div>
 	  </li>
 	</ul>
+	<div class="container">	
+		<h2 class="text-center">Barn Statistics</h2>
+		<div id="chart_div"></div>
+	</div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+	  google.charts.load('current', {packages: ['corechart', 'line']});
+	  google.charts.setOnLoadCallback(drawBackgroundColor);
+
+	  function drawBackgroundColor() {
+	    var data = new google.visualization.DataTable();
+	    data.addColumn('date', 'Date');
+	    data.addColumn('number', 'Overall');
+	    data.addColumn('number', 'Barn A');
+	    data.addColumn('number', 'Barn B');
+	    data.addColumn('number', 'Barn C');
+	    data.addColumn('number', 'Barn D');
+
+	    data.addRows([
+	        [new Date(2016, 0, 1), 10, 2, 4, 2, 0],
+	        [new Date(2016, 0, 2), 20, 8, 2, 2, 8],
+	        [new Date(2016, 0, 3), 35, 7, 12, 2, 2],
+	        [new Date(2016, 0, 4), 85, 12, 24, 40, 0],
+	        [new Date(2016, 0, 5), 45, 11, 2, 18, 1],
+	        [new Date(2016, 0, 6), 10, 5, 1, 2, 0],
+	        // [new Date(2016, 0, 7), 5],
+	        // [new Date(2016, 0, 8), 15],
+	        // [new Date(2016, 0, 9), 25],
+	        // [new Date(2016, 0,10), 05],
+	        // [new Date(2016, 0,11), 75],
+	        // [new Date(2016, 0,12), 35],
+	      ]);
+
+	    var options = {
+	      hAxis: {
+	        title: 'Date'
+	      },
+	      vAxis: {
+	        title: 'Occupied Seats'
+	      },
+	      title: 'Average Daily Usage of all barns',
+	      height: 600
+	    };
+
+	    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	    chart.draw(data, options);
+	  }
+  </script>
+
 </div>

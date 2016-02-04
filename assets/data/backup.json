@@ -1,0 +1,30 @@
+[
+   {
+      "barn_code":"a",
+      "barn_name":"Barn A",
+      "compsLoc": 
+      [  	
+		    {"id":"compa001", "avail":0, "cor_x":0, "cor_y":0},
+		    {"id":"compa002", "avail":1, "cor_x":1, "cor_y":0},
+		    {"id":"compa003", "avail":0, "cor_x":2, "cor_y":0},
+		    {"id":"compa004", "avail":0, "cor_x":3, "cor_y":0},
+		    {"id":"compa005", "avail":1, "cor_x":4, "cor_y":0},
+		    {"id":"compa006", "avail":0, "cor_x":5, "cor_y":0},
+		    {"id":"compa007", "avail":0, "cor_x":6, "cor_y":0},
+		    {"id":"compa008", "avail":0, "cor_x":7, "cor_y":0},
+		    {"id":"compa009", "avail":1, "cor_x":8, "cor_y":0},
+		    {"id":"compa010", "avail":1, "cor_x":9, "cor_y":0},
+		    {"id":"compa011", "avail":0, "cor_x":5, "cor_y":3},
+		    {"id":"compa012", "avail":1, "cor_x":4, "cor_y":4},
+		    {"id":"compa013", "avail":0, "cor_x":6, "cor_y":4},
+		    {"id":"compa014", "avail":0, "cor_x":5, "cor_y":5}
+      ]
+   },
+   {
+      "barn_code":"b",
+      "barn_name":"Barn B"
+   }
+]
+
+
+// [{"barn_code":"a","barn_name":"Barn A","compsLoc":[{"id":"compa001","avail":0,"cor_x":0,"cor_y":0},{"id":"compa002","avail":1,"cor_x":1,"cor_y":0},{"id":"compa003","avail":0,"cor_x":2,"cor_y":0},{"id":"compa004","avail":0,"cor_x":3,"cor_y":0},{"id":"compa005","avail":1,"cor_x":4,"cor_y":0},{"id":"compa006","avail":0,"cor_x":5,"cor_y":0},{"id":"compa007","avail":0,"cor_x":6,"cor_y":0},{"id":"compa008","avail":0,"cor_x":7,"cor_y":0},{"id":"compa009","avail":1,"cor_x":8,"cor_y":0},{"id":"compa010","avail":1,"cor_x":9,"cor_y":0},{"id":"compa011","avail":0,"cor_x":5,"cor_y":3},{"id":"compa012","avail":1,"cor_x":4,"cor_y":4},{"id":"compa013","avail":0,"cor_x":6,"cor_y":4},{"id":"compa014","avail":0,"cor_x":5,"cor_y":7}]},{"barn_code":"b","barn_name":"Barn B"}]

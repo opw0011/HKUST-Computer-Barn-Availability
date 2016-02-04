@@ -1,6 +1,12 @@
 var app = angular.module('barnApp', ['ui.bootstrap','barnNameFilters']);
 
 
+/*
+====================
+CONTROLLERS
+====================
+*/
+
 app.controller('BarnAvailCtrl', function($scope, $http) {
 	$scope.base_url = function(url) {
 		// console.log(url);
@@ -66,78 +72,126 @@ app.controller('BarnViewCtrl', function($scope, $http, $location) {
   //   {id:"compa008", avail:0},
   //   {id:"compa009", avail:1},
   // ];
-  $scope.barnAComps = [
-  	[
-	    {id:"compa001", avail:0},
-	    {id:"compa002", avail:1},
-	    {id:"compa003", avail:0},
-	    {id:"compa004", avail:0},
-	    {id:"compa005", avail:1},
-	    {id:"compa006", avail:0},
-	    {id:"compa007", avail:0},
-	    {id:"compa008", avail:0},
-	    {id:"compa009", avail:1},
-	  ],
-  	[
-	    {id:"compa010", avail:0},
-	    {id:"compa011", avail:1},
-	    {id:"compa012", avail:0},
-	    {id:"compa013", avail:1},
-	    {id:"compa014", avail:0},
-	    {id:"compa015", avail:0},
-	    {id:"compa016", avail:1},
-	    {id:"compa017", avail:0},
-	    {id:"compa018", avail:0},
-	  ],
-  	[
-	    {id:"compa019", avail:1},
-	    {id:"compa020", avail:0},
-	    {id:"compa021", avail:0},
-	    {id:"compa022", avail:0},
-	    {id:"compa023", avail:0},
-	    {id:"compa024", avail:0},
-	    {id:"compa025", avail:0},
-	    {id:"compa026", avail:0},
-	    {id:"compa027", avail:1},
-	  ],
-  	[
-	    {id:"compa028", avail:0},
-	    {id:"compa029", avail:0},
-	    {id:"compa030", avail:0},
-	    {id:"compa031", avail:1},
-	    {id:"compa032", avail:0},
-	    {id:"compa033", avail:0},
-	    {id:"compa034", avail:1},
-	    {id:"compa035", avail:0},
-	    {id:"compa036", avail:0},
-	  ]
 
-  ];
 
-  $scope.test = "dd";
 
-  $scope.barnBComps = [
-    {id:"compa001", avail:0},
-    {id:"compa002", avail:1},
-    {id:"compa003", avail:0},
-    {id:"compa004", avail:0},
-    {id:"compa005", avail:1},
-    {id:"compa006", avail:0},
-    {id:"compa007", avail:0},
-    {id:"compa008", avail:0},
-    {id:"compa009", avail:1},
-  ];
 
-  // $scope.save = function() {
-  //   $http.post('assets/data/barn_loc.json', $scope.languages).then(function(data) {
-  //     $scope.msg = 'Data saved';
-  //   });
-  //   $scope.msg = 'Data sent: '+ JSON.stringify($scope.languages);
-  // };
+	// $http.get(base_url+'assets/data/barn_info.json').then(function(response) {
+	// 	// alert(data);
+ //    $scope.barn_info = response.data[0];
+ //  });
+
+  $http.get(base_url+'assets/data/barn_info.json').then(function(response) {
+    // alert(data);
+    barn_data = response.data;
+    // alert(data);
+    for(var key in barn_data) {
+      barn = barn_data[key]
+      // 'barn_id' is passed by CI using url param e.g. /barn-avail/barn/a -> barn_id = a
+      // retrieve the wanted barn data
+      if(barn.barn_id == barn_id)
+        $scope.barn = barn;
+    }
+    if(!$scope.barn) 
+      alert('ERROR: barn not found');
+
+  });
+
+  // $scope.isAvail = function(comp) {
+  // 	// if avail ==1, return true; otherwise return false
+  // 	return comp.avail == '1';
+  // }
+
+  // $scope.matchCoordinate = function(comp, x, y) {
+  // 	// if avail ==1, return true; otherwise return false
+  // 	console.log(comp);
+  // 	console.log("x="+x+" y="+y);
+  // 	return (comp.cor_x == x) && (comp.cor_y == y) ;
+  // }
+
+  // to be removed
+  $scope.testState = '0';
+
 })
 .directive('compAvail', function() {
-  return {
-  	restrict: 'E',
-    templateUrl: base_url+'assets/templates/comp_avail.html'
+	return {
+		restrict: 'E',
+		templateUrl: base_url+'assets/templates/comp_avail.html'
+	};
+});
+
+app.controller('BarnEditCtrl', function($scope, $http, $location) {
+	$scope.test = 'hi';
+  $scope.testdata = '123,542,50';
+
+	$http.get(base_url+'assets/data/barn_info.json').then(function(response) {
+		// alert(data);
+    barn_data = response.data;
+    // alert(data);
+    for(var key in barn_data) {
+      barn = barn_data[key]
+      // 'barn_id' is passed by CI using url param e.g. /barn-avail/admin/edit/a -> barn_id = a
+      // retrieve the wanted barn data
+      if(barn.barn_id == barn_id)
+        $scope.barn = barn;
+    }
+    if(!$scope.barn) 
+      alert('ERROR: barn not found');
+
+  });
+
+  $scope.updateJson = function() {
+    alert('updated');
+	  var data = $scope.barn_info;
+	  $http.post(base_url+"barn/update", data, {headers: {'Content-Type': 'application/json'}}).success(function(data, status) {
+	      // $scope.hello = data;
+	  })
+  }
+
+  $scope.updateCoord = function() {
+    alert(document.getElementById("1").coords);
+    document.getElementById("1").coords = $scope.testdata;
+  }
+
+});
+
+
+
+/*
+====================
+FILTERS
+====================
+*/
+
+app.filter('range', function() {
+	return function(input, total) {
+		total = parseInt(total);
+
+		for (var i=0; i<total; i++) {
+			input.push(i);
+		}
+
+		return input;
+	};
+});
+
+app.filter("compsMap", function() { // register new filter
+
+  return function(input, x, y) { // filter arguments
+
+    return input.replace(RegExp(searchRegex), replaceRegex); // implementation
+
+  };
+});
+
+
+app.filter("compAvailibility", function() { // register new filter
+
+  return function(input) { // filter arguments
+    if(input == '1')
+      return 'Available';
+    else
+      return 'Unavailable';
+
   };
 });

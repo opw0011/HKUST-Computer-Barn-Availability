@@ -49,6 +49,57 @@ class Barn extends CI_Controller {
 		$this->output->set_content_type('application/json')
 		->set_output(json_encode($data));
 	}
+
+	// edit barn computers location
+	public function edit() {
+		$this->load->view('test');
+			/*
+			$jsonString = file_get_contents('assets/data/barn_info.json');
+			$data = json_decode($jsonString);
+			// var_dump($data);
+			var_dump($data[0]->compsLoc[0]->id);
+
+
+			// $data[0]->activity_name = "TENNIS";
+			// or if you want to change all entries with activity_code "1"
+			foreach ($data as $key => $entry) {
+			    if ($entry->barn_code == 'a') {
+			        $data[$key]->barn_name = "ssds";
+			    }
+			}
+
+			$newJsonString = json_encode($data);
+			file_put_contents('assets/data/barn_info.json', $newJsonString);
+			*/
+	}
+
+	// handel update Json Request
+	public function update() {
+
+		// print_r(json_decode(file_get_contents('php://input')));
+		$new_json = json_decode(file_get_contents('php://input'));
+		print_r($new_json);
+			
+		// $jsonString = file_get_contents('assets/data/barn_info.json');
+		// $data = json_decode($jsonString);
+		// // var_dump($data);
+		// var_dump($data[0]->compsLoc[0]->id);
+
+
+		// // $data[0]->activity_name = "TENNIS";
+		// // or if you want to change all entries with activity_code "1"
+		// foreach ($data as $key => $entry) {
+		//     if ($entry->barn_code == 'a') {
+		//         $data[$key]->barn_name = "ssds";
+		//     }
+		// }
+
+		$newJsonString = json_encode($new_json);
+		// echo $newJsonString;
+		file_put_contents('assets/data/barn_info.json', $newJsonString);
+
+
+	}
 }
 
 /* End of file Barn.php */

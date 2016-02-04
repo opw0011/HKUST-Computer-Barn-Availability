@@ -1,0 +1,26 @@
+[
+   {
+      "barn_id":"b",
+      "barn_name":"Barn B",
+      "compsLoc": 
+      [  	
+		    {"id":"compb001", "avail":0, "coords":"130,435,20"},
+		    {"id":"compb002", "avail":1, "coords":"52,480,20"},
+		    {"id":"compb003", "avail":1, "coords":"90,405,20"},
+		    {"id":"compa004", "avail":0, "coords":"95,510,20"}
+      ]
+   },
+   {
+      "barn_id":"a",
+      "barn_name":"Barn A",
+      "compsLoc": 
+      [     
+          {"id":"compa001", "avail":0, "coords":"60,130,20"},
+          {"id":"compa002", "avail":1, "coords":"135,130,20"},
+          {"id":"compa003", "avail":1, "coords":"270,130,20"},
+          {"id":"compa004", "avail":0, "coords":"345,130,20"},
+          {"id":"compa005", "avail":0, "coords":"480,130,20"},
+          {"id":"compa006", "avail":0, "coords":"555,130,20"}
+      ]
+   }
+]

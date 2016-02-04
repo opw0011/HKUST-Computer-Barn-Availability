@@ -15,3 +15,12 @@
 .tooltip.tooltip-custom .tooltip-inner{
 	max-width: 300px;
 }
+
+.map-grid-y {
+	border-bottom: 1px dashed #DDD;
+}
+
+.map-grid-x {
+	border-left: 1px dashed #DDD;
+
+}

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Barn Availability</title>
+		<title>Barn EDIT</title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -18,10 +18,8 @@
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/main.css') ?>">
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/stacktable.css') ?>">
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/jquery.qtip.min.css') ?>">
-		<!-- d3js -->
-		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	</head>
-	<body >
+	<body ng-controller="BarnEditCtrl">
 
 		<!-- navbar start -->
 
@@ -41,9 +39,9 @@
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<?=base_url('barn/a') ?>">Barn A</a></li>
-					<li><a href="<?=base_url('barn/b') ?>">Barn B</a></li>
-					<li><a href="<?=base_url('barn/c') ?>">Barn C</a></li>
-					<li><a href="<?=base_url('barn/d') ?>">Barn D</a></li>
+					<li><a href="#">Barn B</a></li>
+					<li><a href="#">Barn C</a></li>
+					<li><a href="#">Barn D</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<!-- <li><a href="#">Link</a></li> -->
@@ -60,15 +58,26 @@
 
 		<!-- navbar end -->
 
-		<!-- main-container start -->
+		<!-- main-container start -->			
+		<!-- ng-repeat="barn in barn_info| filter: {barn_id: '<?=$barn_id?>'}" -->
+		<div id="main-container">
+			<h3>Barn Name:{{barn.barn_name}} [{{barn.barn_id}}]</h3>
+			{{barn.compsLoc}}
+			<img id="barn-map" src="<?=base_url('assets/imgs/map.PNG')?>" alt="" usemap="#Map" style="width:100%"/>
+			<map name="Map" id="Map" >
+		    <area ng-repeat="comp in barn.compsLoc" id="" avail="e" alt="" title="" href="#" shape="circle" coords="{{comp.coords}}" data-qtip="{{comp.id}}"/>
+<!-- 		    <area id="" avail="e" alt="" title="" href="#" shape="circle" coords="117,424,30" data-qtip="SHDIFSDFI"/>
+		    <area id="1" avail="e" alt="" title="" href="#" shape="circle" coords="{{testdata}}" data-qtip="TTEST"/> -->
+				<area id="1" avail="e" alt="" title="" href="#" shape="circle" coords="{{testdata}}" data-qtip="TTEST"/>
+			</map>
+			<div class="container-fluid" >{{testdata}}
+				<input id="coord" type="text" name="" ng-model="testdata" id="input" class="form-control" value="" required="required" pattern="" title="">
+				<button id="refresh_btn" type="button" class="btn btn-default" ng-click="updateCoord()">button</button>
 
-		<?php
-			if($barn_id == 'all')
-		  	$this->load->view('barn_all_view');
-		  else
-		  	$this->load->view('barn_view');
-		?>
+				
 
+			</div>			
+		</div>
 		<!-- main-container end -->
 
 
@@ -86,6 +95,8 @@
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<!-- Angular-ui JavaScript-->
 		<script src="<?php echo base_url('assets/js/lib/ui-bootstrap-tpls-0.14.3.min.js') ?>"></script>
+		<script src="<?php echo base_url('assets/js/main.js') ?>"></script>
+		<script src="<?php echo base_url('assets/js/mapResize.js') ?>"></script>
 		<script src="<?php echo base_url('assets/js/filter.js') ?>"></script>
 		<!-- stacktable.js -->
 		<script src="<?php echo base_url('assets/js/lib/stacktable.js') ?>"></script>
@@ -95,9 +106,5 @@
 		<script src="<?php echo base_url('assets/js/lib/jquery.qtip.min.js') ?>"></script>
 		<!-- map highlight -->
 		<script src="<?php echo base_url('assets/js/lib/jquery.imagemapster.min.js') ?>"></script>
-
-		<script src="<?php echo base_url('assets/js/main.js') ?>"></script>
-		<script src="<?php echo base_url('assets/js/mapResize.js') ?>"></script>
-
 	</body>
 </html>
