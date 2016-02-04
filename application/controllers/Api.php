@@ -6,7 +6,9 @@ class Api extends REST_Controller {
   {
       // respond with information about a user
       // echo "hi";
-      $data = array('returned: '. $this->get('id'));
+//      $data = array('returned1: '. $this->get('id'));
+      $this->load->model('Barn_model');
+      $data = $this->Barn_model->get_barn( $this->get('id') );
       $this->response($data);
   }
 
