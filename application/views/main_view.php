@@ -78,6 +78,8 @@
 		</script>
 		<!-- angularjs -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+		<!--ng-route-->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 		<!-- angularjs barnApp module -->
 		<script src="<?php echo base_url('assets/js/app.js') ?>"></script>
 		<!-- jQuery -->
@@ -98,6 +100,11 @@
 
 		<script src="<?php echo base_url('assets/js/main.js') ?>"></script>
 		<script src="<?php echo base_url('assets/js/mapResize.js') ?>"></script>
+
+		<!--xeditable-->
+		<script src="<?php echo base_url('assets/js/lib/xeditable.min.js') ?>"></script>
+		<link rel="stylesheet" src="<?php echo base_url('assets/css/xeditable.css') ?>">
+
 
 	</body>
 </html>

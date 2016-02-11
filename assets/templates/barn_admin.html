@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>Edit Barn Information</h2>
+    <table class="table table-bordered table-condensed table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="barn in barns">
+            <td>{{barn.barn_uid}}</td>
+            <td>
+                <span editable-text="barn.barn_name" e-name="name" e-form="barnForm" e-required>
+                  {{barn.barn_name}}
+                </span>
+            </td>
+            <td>
+                <span editable-text="barn.barn_code" e-name="code" e-form="barnForm" e-required>
+                  {{barn.barn_code}}
+                </span>
+            </td>
+            <td>
+                <span editable-text="barn.barn_desc" e-name="desc" e-form="barnForm" e-required>
+                 {{barn.barn_desc}}
+                </span>
+            </td>
+            <td>
+                <!-- form -->
+                <form editable-form name="barnForm" onbeforesave="saveBarn($data, barn.barn_uid)" ng-show="barnForm.$visible" class="form-buttons form-inline" shown="inserted == barn">
+                    <button type="submit" ng-disabled="barnForm.$waiting" class="btn btn-primary btn-sm">Save</button>
+                    <button type="button" ng-disabled="barnForm.$waiting" ng-click="barnForm.$cancel()" class="btn btn-default btn-sm">Cancel</button>
+                </form>
+                <div class="buttons" ng-show="!barnForm.$visible">
+                    <button class="btn btn-primary btn-sm" ng-click="barnForm.$show()">Edit</button>
+                    <button class="btn btn-danger btn-sm" ng-click="removeBarn($index)" ng-disabled="true">Delete</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-default" ng-click="addBarn()">Add row</button>
+</div>

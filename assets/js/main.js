@@ -6,7 +6,7 @@ $(document).ready(function() {
  //  	amount_format: function(p, t) {return p + ' of ' + t;}
 	// });
 
-$('table').stacktable();
+//$('table').stacktable();
   // $('map').imageMapResize();
 	// mapHighLight
 

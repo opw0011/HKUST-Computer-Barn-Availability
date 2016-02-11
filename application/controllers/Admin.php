@@ -9,7 +9,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		echo "admin page";
+		$this->load->view('admin_view');
 	}
 
 	public function edit($barn)
@@ -18,6 +18,14 @@ class Admin extends CI_Controller {
 		$data['barn_id'] = $barn;
 		$this->load->view('edit_barn_view', $data);
 	}
+//
+//	public function barn()
+//	{
+//		// echo "edit ". $barn;
+//		$this->load->view('admin_view');
+//	}
+
+
 
 }
 
