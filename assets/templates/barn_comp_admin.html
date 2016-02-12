@@ -55,16 +55,16 @@
                 <!--{{comp.loc_r}}-->
                 <!--</span>-->
                 X:{{comp.loc_x}} Y:{{comp.loc_y}} R:{{comp.loc_r}}
-                <button type="button" class="btn btn-default btn-sm" ng-click="open(comp)" ng-show="barnCompForm.$visible">Edit Location</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="open(comp)" ng-show="barnCompForm.$visible">Edit Location</button>
             </td>
             <td>
                 <!-- form -->
                 <form editable-form name="barnCompForm" onbeforesave="saveComp($data, comp)" ng-show="barnCompForm.$visible" class="form-buttons form-inline" shown="inserted == comp">
                     <button type="submit" ng-disabled="barnCompForm.$waiting" class="btn btn-primary btn-sm">Save</button>
-                    <button type="button" ng-disabled="barnCompForm.$waiting" ng-click="barnCompForm.$cancel()" class="btn btn-default btn-sm">Cancel</button>
+                    <button type="button" ng-disabled="barnCompForm.$waiting" ng-click="barnCompForm.$cancel(); restoreLoc(comp)" class="btn btn-default btn-sm">Cancel</button>
                 </form>
                 <div class="buttons" ng-show="!barnCompForm.$visible">
-                    <button class="btn btn-primary btn-sm" ng-click="barnCompForm.$show(); unbindMap()">Edit</button>
+                    <button class="btn btn-primary btn-sm" ng-click="barnCompForm.$show(); unbindMap(); copyLoc(comp);">Edit</button>
                     <button class="btn btn-danger btn-sm" ng-click="removeComp($index, comp.comp_uid)">Delete</button>
                 </div>
             </td>
@@ -72,7 +72,7 @@
         </tbody>
     </table>
     <button class="btn btn-default" ng-click="addComp()">Add row</button>
-
+    <button class="btn btn-primary" ng-click="back()">Back</button>
 
     <!--modal-->
     <div>

@@ -90,7 +90,7 @@ app.controller('BarnViewCtrl', function($scope, $http, $location) {
       if(barn.barn_id == barn_id)
         $scope.barn = barn;
     }
-    if(!$scope.barn) 
+    if(!$scope.barn)
       alert('ERROR: barn not found');
 
   });
@@ -133,7 +133,7 @@ app.controller('BarnEditCtrl', function($scope, $http, $location) {
       if(barn.barn_id == barn_id)
         $scope.barn = barn;
     }
-    if(!$scope.barn) 
+    if(!$scope.barn)
       alert('ERROR: barn not found');
 
   });
@@ -153,7 +153,7 @@ app.controller('BarnEditCtrl', function($scope, $http, $location) {
 
 });
 
-app.controller('BarnAdminCtrl', function($scope, $http, BarnServices) {
+app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices) {
     BarnServices.getBarns().success(function(data) {
         $scope.barns = data;
         console.log($scope.barns);
@@ -187,9 +187,14 @@ app.controller('BarnAdminCtrl', function($scope, $http, BarnServices) {
         $scope.barns.push($scope.inserted);
     };
 
+    $scope.viewBarnComp = function(id) {
+      // alert(id);
+      $location.path('barn/' + id);
+    };
+
 });
 
-app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $routeParams, $uibModal, BarnServices, BarnCompServices) {
+app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $routeParams, $uibModal, BarnServices, BarnCompServices) {
     var bid = $routeParams.barn_uid;
 
     BarnCompServices.getBarnComp(bid).success(function(data) {
@@ -298,16 +303,32 @@ app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $routeParams, 
         }
     };
 
-    // MODAL
-    $scope.items = ['item1', 'item2', 'item3'];
+    // back to barn main page
+    $scope.back = function() {
+      $location.path('barns');
+    }
 
-    $scope.animationsEnabled = true;
+    // make a copy for comp loc so that it can be restore when cancel
+    $scope.copyLoc = function(comp) {
+        comp.loc_x_cpy = comp.loc_x;
+        comp.loc_y_cpy = comp.loc_y;
+        comp.loc_r_cpy = comp.loc_r;
+    }
+
+    // restore loc when cancel
+    $scope.restoreLoc = function(comp) {
+        comp.loc_x = comp.loc_x_cpy;
+        comp.loc_y = comp.loc_y_cpy;
+        comp.loc_r = comp.loc_r_cpy;
+    }
+
+    // MODAL
 
     // when btn click to open the modal
     $scope.open = function (comp) {
         $log.debug(comp);
         var modalInstance = $uibModal.open({
-            animation: false,
+            animation: true,
             templateUrl: 'myModalContent.html',
             controller: 'ModalInstanceCtrl',
             size: 'lg',
