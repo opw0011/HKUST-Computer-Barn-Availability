@@ -35,16 +35,16 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<?=base_url() ?>">Barn Availability</a>
+				<a class="navbar-brand" href="barn/">Barn Availability</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="<?=base_url('barn/a') ?>">Barn A</a></li>
-					<li><a href="<?=base_url('barn/b') ?>">Barn B</a></li>
-					<li><a href="<?=base_url('barn/c') ?>">Barn C</a></li>
-					<li><a href="<?=base_url('barn/d') ?>">Barn D</a></li>
+					<li><a href="barn#/map/1000">Barn A</a></li>
+					<li><a href="barn#/map/1001">Barn B</a></li>
+					<li><a href="barn#/map/1002">Barn C</a></li>
+					<li><a href="barn#/map/1003">Barn D</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<!-- <li><a href="#">Link</a></li> -->
@@ -64,11 +64,13 @@
 		<!-- main-container start -->
 
 		<?php
-			if($barn_id == 'all')
-		  	$this->load->view('barn_all_view');
-		  else
-		  	$this->load->view('barn_view');
+//			if($barn_id == 'all')
+//		  	$this->load->view('barn_all_view');
+//		  else
+//		  	$this->load->view('barn_view');
 		?>
+
+		<div ng-view></div>
 
 		<!-- main-container end -->
 

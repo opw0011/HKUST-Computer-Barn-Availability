@@ -9,9 +9,17 @@ app.run(function(editableOptions) {
 app.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
+        when('/', {
+            templateUrl: base_url+'assets/templates/barn_overview.html',
+            controller: 'BarnAvailCtrl'
+        }).
         when('/barns', {
             templateUrl: base_url+'assets/templates/barn_admin.html',
             controller: 'BarnAdminCtrl'
+        }).
+        when('/map/:barn_uid', {
+            templateUrl: base_url+'assets/templates/barn_map.html',
+            controller: 'BarnMapCtrl'
         }).
         when('/barn/:barn_uid', {
             templateUrl: base_url+'assets/templates/barn_comp_admin.html',
@@ -118,6 +126,21 @@ app.controller('BarnViewCtrl', function($scope, $http, $location) {
 	};
 });
 
+app.controller('BarnMapCtrl', function($scope, $http, $location, $routeParams, BarnCompServices, BarnServices){
+    console.log("inside BarnMapCtrl");
+    var bid = $routeParams.barn_uid;
+
+    BarnCompServices.getBarnComp(bid).success(function(data) {
+        $scope.comps = data;
+        console.log($scope.comps);
+    });
+
+    BarnServices.getBarn(bid).success(function(data) {
+        $scope.barn = data[0];
+        console.log($scope.barn);
+    });
+});
+
 app.controller('BarnEditCtrl', function($scope, $http, $location) {
 	$scope.test = 'hi';
   $scope.testdata = '123,542,50';
@@ -197,6 +220,13 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices)
 app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $routeParams, $uibModal, BarnServices, BarnCompServices) {
     var bid = $routeParams.barn_uid;
 
+    // get barn data
+    BarnServices.getBarn(bid).success(function(data) {
+        $scope.barn = data[0];
+        console.log($scope.barn);
+    });
+
+    // get barn comp data
     BarnCompServices.getBarnComp(bid).success(function(data) {
         $scope.comps = data;
         console.log($scope.comps);
@@ -498,33 +528,33 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, comp) {
  SERVICES
  ====================
  */
-app.service('compLocServices', function() {
-    var stringValue = 'test string value';
-    var objectValue = {
-        data: 'test object value'
-    };
-    var locObj = {
-        loc_x : 0,
-        loc_y : 0,
-        loc_r : 0
-    }
-
-
-    return {
-        getString: function() {
-            return stringValue;
-        },
-        setString: function(value) {
-            stringValue = value;
-        },
-        getLocObj: function() {
-            return locObj;
-        },
-        setLocObj: function(obj) {
-            locObj = obj;
-        }
-    }
-});
+//app.service('compLocServices', function() {
+//    var stringValue = 'test string value';
+//    var objectValue = {
+//        data: 'test object value'
+//    };
+//    var locObj = {
+//        loc_x : 0,
+//        loc_y : 0,
+//        loc_r : 0
+//    }
+//
+//
+//    return {
+//        getString: function() {
+//            return stringValue;
+//        },
+//        setString: function(value) {
+//            stringValue = value;
+//        },
+//        getLocObj: function() {
+//            return locObj;
+//        },
+//        setLocObj: function(obj) {
+//            locObj = obj;
+//        }
+//    }
+//});
 
 
 /*

@@ -21,39 +21,6 @@
 
 <!-- navbar start -->
 
-<nav class="navbar navbar-default" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="<?=base_url() ?>">Barn Availability</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav">
-            <li><a href="<?=base_url('barn/a') ?>">Barn A</a></li>
-            <li><a href="<?=base_url('barn/b') ?>">Barn B</a></li>
-            <li><a href="<?=base_url('barn/c') ?>">Barn C</a></li>
-            <li><a href="<?=base_url('barn/d') ?>">Barn D</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <!-- <li><a href="#">Link</a></li> -->
-            <li uib-dropdown on-toggle="toggled(open)">
-                <a href="#" id="simple-dropdown" uib-dropdown-toggle>Settings <b class="caret"></b></a>
-                <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
-                    <li><a href="#" target="_blank">Edit (coming soon...)</a></li>
-                    <!-- 		<li><a href="#">Action2</a></li> -->
-                </ul>
-            </li>
-        </ul>
-    </div><!-- /.navbar-collapse -->
-</nav>
-
 <!-- navbar end -->
 
 <!-- main-container start -->
