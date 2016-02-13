@@ -9,6 +9,18 @@
     <!--<button class="btn" ng-click="bindMap()">Refresh Map</button>-->
 
     <h2>Edit Computers of {{barn.barn_name}}</h2>
+    <button class="btn btn-primary pull-right" ng-click="back()">Back</button>
+
+    <div class="well well-small">
+        <i class="fa fa-lightbulb-o"></i>
+        This page lists all the computers located in {{barn.barn_name}}.
+        <br>
+        Click "Edit" to modify the basic information of each computer. To save change, click "Save". To discard changes, click "Cancle".
+        <br>
+        Note that to change the location, you need to click "Edit location". Then drag a red circle on the map to indicate the location of the computer.
+    </div>
+
+
     <!--{{barn}}-->
     <table class="table table-bordered table-condensed table-hover">
         <thead>
@@ -71,9 +83,10 @@
         </tr>
         </tbody>
     </table>
-    <button class="btn btn-default" ng-click="addComp()">Add row</button>
-    <button class="btn btn-primary" ng-click="back()">Back</button>
-
+    <button class="btn btn-default" ng-click="addComp()">New Computer</button>
+    <br>
+    <br>
+    <em>* If you see no computer, please add new computer</em>
     <!--modal-->
     <div>
         <script type="text/ng-template" id="myModalContent.html">

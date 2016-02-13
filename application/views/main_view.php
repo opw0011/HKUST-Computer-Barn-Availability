@@ -107,6 +107,9 @@
 		<!--xeditable-->
 		<script src="<?php echo base_url('assets/js/lib/xeditable.min.js') ?>"></script>
 		<link rel="stylesheet" src="<?php echo base_url('assets/css/xeditable.css') ?>">
+		<!--ng-google-chart-->
+		<script src="assets/js/lib/ng-google-chart.min.js"></script>
+
 
 
 	</body>

@@ -1,4 +1,4 @@
-var app = angular.module('barnApp', ['ui.bootstrap','barnNameFilters', 'xeditable', 'ngRoute']);
+var app = angular.module('barnApp', ['ui.bootstrap','barnNameFilters', 'xeditable', 'ngRoute', 'googlechart']);
 
 
 // xeditable config
@@ -79,6 +79,54 @@ app.controller('BarnAvailCtrl', function($scope, $http) {
 	// 	$scope.bar_type = type;
 
 	// }
+});
+
+app.controller("BarnOverviewChartCtrl", function ($scope, googleChartApiPromise) {
+
+    $scope.chartObject = {
+        type: 'LineChart'
+    };
+
+    $scope.chartObject.options = {
+        hAxis: {
+            title: 'Date'
+        },
+        vAxis: {
+            title: 'Occupied Seats'
+        },
+        title: 'Average Daily Usage of all barns',
+        height: 600
+    };
+
+    googleChartApiPromise.then(buildDataTable);
+
+    function buildDataTable(){
+        var data = new google.visualization.DataTable();
+        // Continue building the data table.
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Overall');
+        data.addColumn('number', 'Barn A');
+        data.addColumn('number', 'Barn B');
+        data.addColumn('number', 'Barn C');
+        data.addColumn('number', 'Barn D');
+
+        data.addRows([
+            [new Date(2016, 0, 1), 10, 2, 4, 2, 0],
+            [new Date(2016, 0, 2), 20, 8, 2, 2, 8],
+            [new Date(2016, 0, 3), 35, 7, 12, 2, 2],
+            [new Date(2016, 0, 4), 85, 12, 24, 40, 0],
+            [new Date(2016, 0, 5), 45, 11, 2, 18, 1],
+            [new Date(2016, 0, 6), 10, 5, 1, 2, 0],
+            // [new Date(2016, 0, 7), 5],
+            // [new Date(2016, 0, 8), 15],
+            // [new Date(2016, 0, 9), 25],
+            // [new Date(2016, 0,10), 05],
+            // [new Date(2016, 0,11), 75],
+            // [new Date(2016, 0,12), 35],
+        ]);
+
+        $scope.chartObject.data =data;
+    }
 });
 
 app.controller('BarnViewCtrl', function($scope, $http, $location) {
@@ -643,3 +691,74 @@ app.filter("compAvailibility", function() { // register new filter
 
   };
 });
+
+
+app.directive('ngMapster', function() {
+    return {
+        // Restrict it to be an attribute in this case
+        restrict: 'A',
+        // responsible for registering DOM listeners as well as updating the DOM
+        link: function(scope, element, attrs) {
+            var default_option = {
+                areas: [
+                    {
+                        // when a computer is full
+                        key: '0',
+                        fill:true,
+                        fillColor: 'DA3418',
+                        staticState: true,
+                    },
+                    {
+                        // when a computer is available
+                        key: '1',
+                        fill:true,
+                        fillColor: '34DA18',
+                        staticState: true,
+                    },
+                    {
+                        key: 'e',
+                        fill:true,
+                        fillColor: '2A61E6',
+                        staticState: true,
+                    }
+                ],
+                fill: false,
+                fillOpacity: 0.5,
+                stroke: true,
+                mapKey: 'avail'
+            }
+
+            setTimeout(function(){
+                console.log("mapster directive is called");
+                $(element).mapster(default_option);
+            },1500);
+
+        }
+    };
+});
+
+app.directive('ngDataQtip', function() {
+    return {
+        // Restrict it to be an attribute in this case
+        restrict: 'A',
+        // responsible for registering DOM listeners as well as updating the DOM
+        link: function(scope, element, attrs) {
+
+            setTimeout(function(){
+                console.log("qtip directive is called");
+                $(element).qtip({
+                    content: {
+                         text: attrs.ngDataQtip
+                        //attr: 'data-qtip'
+                    },
+                    position: {
+                        my: 'top left',
+                        at: 'bottom right'
+                    }
+                });
+            },1500);
+
+        }
+    };
+});
+
