@@ -38,10 +38,10 @@ class Barn extends CI_Controller {
 		// );
 		if ($type == 'all'){
 			$data = array(
-				array("barn_id"=>"a", "num_comp"=>"40", "num_avail"=>"31"),
-				array("barn_id"=>"b", "num_comp"=>"80", "num_avail"=>"42"),
-				array("barn_id"=>"c", "num_comp"=>"60", "num_avail"=>"40"),
-				array("barn_id"=>"d", "num_comp"=>"40", "num_avail"=>"4"),
+				array("barn_name"=>"Barn A","barn_id"=>"1000", "num_comp"=>"40", "num_avail"=>"31"),
+				array("barn_name"=>"Barn B","barn_id"=>"1001", "num_comp"=>"80", "num_avail"=>"42"),
+				array("barn_name"=>"Barn C","barn_id"=>"1002", "num_comp"=>"60", "num_avail"=>"40"),
+				array("barn_name"=>"Barn D","barn_id"=>"1003", "num_comp"=>"40", "num_avail"=>"4"),
 			);
 		}
 

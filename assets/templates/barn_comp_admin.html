@@ -20,6 +20,8 @@
         Note that to change the location, you need to click "Edit location". Then drag a red circle on the map to indicate the location of the computer.
     </div>
 
+    <a class="btn btn-warning pull-right" href="barn#/map/{{barn.barn_uid}}" target="_blank">View Barn Map</a>
+
 
     <!--{{barn}}-->
     <table class="table table-bordered table-condensed table-hover">
@@ -89,6 +91,11 @@
     <em>* If you see no computer, please add new computer</em>
     <!--modal-->
     <div>
+        <style>
+            .modal-lg {
+                width: 80%;
+            }
+        </style>
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
                 <h3 class="modal-title">Drag a circle to locate the computer location!</h3>
@@ -96,7 +103,7 @@
             <div class="modal-body">
                 <!--<img src="http://i.imgur.com/PWSOy.jpg" id="background" />-->
                 <div>
-                    <img ng-src="assets/imgs/barn_map/a.PNG" usemap="#Map" ng-click="onClickMap($event)" id="barn" style="visibility: hidden;"/>
+                    <img ng-src="assets/imgs/barn_map/{{barn.barn_uid}}.PNG" usemap="#Map" ng-click="onClickMap($event)" id="barn" style="visibility: hidden;" />
                     <canvas id="bgCanvas"  style="border:1px solid #c3c3c3; position: absolute; left: 0; top: 0; z-index: 0;" ng-init="initCanvas()">
                         Your browser does not support the HTML5 canvas tag.
                     </canvas>
@@ -106,6 +113,7 @@
                     </canvas>
                 </div>
                 DEBUG:
+                {{barn}}
                 {{comp}}
                 X: {{canvas.x}} Y: {{canvas.y}} R: {{canvas.r}}
 

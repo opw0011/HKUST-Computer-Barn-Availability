@@ -10,7 +10,7 @@
 
             <div class="row">
                 <div class="col-sm-2">
-                    <h4>{{barn.barn_id | barnName}}</h4>
+                    <h4>{{barn.barn_name}}</h4>
                 </div>
                 <div class="col-sm-9">
                     <small>Available Seats</small>
@@ -19,7 +19,7 @@
                     </uib-progressbar>
                 </div>
                 <div class="col-sm-1">
-                    <a href="{{base_url('barn/')+barn.barn_id}}">Preview</a>
+                    <a href="barn#/map/{{barn.barn_id}}">Preview</a>
                 </div>
             </div>
         </li>

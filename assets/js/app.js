@@ -58,27 +58,6 @@ app.controller('BarnAvailCtrl', function($scope, $http) {
 		$scope.total_comp = total_comp;
 	});
 
-	// // customize the progress bar color according to the percentage
-	// $scope.showBarColor = function(cur, max) {
-
-	// 	console.log('show color');
-	// 	$scope.bar_type = '';
-
-	// 	var percetage = (cur/max)*100;
-	// 	var type;
-	// 	console.log(percetage);
-	// 	if (percetage >= 80)
-	// 		type = 'success';
-	// 	else if (percetage >= 50)
-	// 		type = 'info';
-	// 	else if (percetage >= 30)
-	// 		type = 'warning';
-	// 	else {type = 'danger';}
-
-	// 	console.log(type);
-	// 	$scope.bar_type = type;
-
-	// }
 });
 
 app.controller("BarnOverviewChartCtrl", function ($scope, googleChartApiPromise) {
@@ -359,6 +338,10 @@ app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $ro
         if(id == 'New') {
             // append the barn id in the url
             angular.extend(data, {bid: bid});
+            // append the comp which is not in the eform
+            angular.extend(data, {x: x});
+            angular.extend(data, {y: y});
+            angular.extend(data, {r: r});
             BarnCompServices.createBarnComp(data);
             window.location.reload();
         }
@@ -414,6 +397,9 @@ app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $ro
                 // pass the comp id to modal instance
                 comp: function() {
                     return comp;
+                },
+                barn: function() {
+                    return $scope.barn;
                 }
             }
         });
@@ -432,12 +418,10 @@ app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $ro
 
 });
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, comp) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routeParams, comp, barn) {
+    $scope.barn = barn;
     $scope.comp = comp;
     $scope.canvas = {};
-    //$scope.selected = {
-    //    item: $scope.items[0]
-    //};
 
     $scope.ok = function () {
         // pass back the modified coordinate

@@ -1,11 +1,11 @@
-<div id="main-container">
-    <div class="container-fluid text-center">
-        <h2>{{barn.barn_name}} Availability</h2>
-        <em>{{barn.barn_desc}}</em>
-        <br>
-        <small>last updated: 15 minutes ago</small>
-    </div>
-    <img ng-mapster id="barn-map" ng-src="assets/imgs/barn_map/{{barn.barn_code}}.PNG" alt="{{barn.barn_name}} Map" usemap="#Map" style="width:100%"/>
+<div class="container text-center">
+
+    <h2>{{barn.barn_name}} Availability</h2>
+    <em>{{barn.barn_desc}}</em>
+    <br>
+    <small>last updated: 15 minutes ago</small>
+
+    <img ng-mapster id="barn-map" ng-src="assets/imgs/barn_map/{{barn.barn_uid}}.PNG" alt="{{barn.barn_name}} Map" usemap="#Map" style="max-width:1000px; margin: 0 auto;"/>
     <map name="Map" id="Map">
         <area ng-repeat="comp in comps" id="" avail="{{comp.avail_status}}" alt="" title="" href="#" shape="circle" coords="{{comp.loc_x}},{{comp.loc_y}},{{comp.loc_r}}" ng-data-qtip="{{comp.comp_code}}: {{comp.avail_status|compAvailibility}}"/>
         <!-- <area id="" avail="{{testState}}" alt="" title="" href="#" shape="poly" coords="117,424,116,447,146,447,147,424" data-qtip="SHDIFSDFI"/> -->

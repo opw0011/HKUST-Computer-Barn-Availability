@@ -127,6 +127,9 @@ class Api extends REST_Controller {
             'avail_status' => $this->post('status'),
             'comp_desc' => $this->post('desc'),
             'barn_uid' => $this->post('bid'),
+            'loc_x' => $this->post('x'),
+            'loc_y' => $this->post('y'),
+            'loc_r' => $this->post('r'),
         ));
 
         if($result === FALSE)
