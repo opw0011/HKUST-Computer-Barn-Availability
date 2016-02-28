@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" ng-app="barnApp">
+<html lang="" ng-app="barnAppAdmin">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +37,7 @@
 <!-- angularjs -->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 <!-- angularjs barnApp module -->
-<script src="<?php echo base_url('assets/js/app.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/app_admin.js') ?>"></script>
 <!-- jQuery -->
 <script src="//code.jquery.com/jquery.js"></script>
 <!-- Bootstrap JavaScript -->
