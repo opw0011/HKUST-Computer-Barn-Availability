@@ -153,6 +153,19 @@ class Api extends REST_Controller {
             $this->response(array('status' => 'success'));
     }
 
+    function auth_post()
+    {
+        $user_name =  $this->post('id');
+        $user_pw =  $this->post('password');
+
+        // TODO: instead of hrad-code, use db
+        if($user_name == 'admin' && $user_pw == 'admin')
+            $this->response(array('login' => 'success'));
+        else
+            $this->response(array('login' => 'failed'));
+
+    }
+
 
 
 }
