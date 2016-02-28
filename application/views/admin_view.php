@@ -35,7 +35,7 @@
 //    var barn_id = "<?//=$barn_id?>//";
 </script>
 <!-- angularjs -->
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 <!-- angularjs barnApp module -->
 <script src="<?php echo base_url('assets/js/app_admin.js') ?>"></script>
 <!-- jQuery -->
@@ -62,7 +62,12 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/xeditable.css') ?>">
 
 <!--ng-route-->
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+
+<!--ng-cookies-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
+
+
 
 <script src="assets/js/lib/ng-google-chart.min.js"></script>
 

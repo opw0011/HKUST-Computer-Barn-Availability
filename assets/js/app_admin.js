@@ -1,4 +1,4 @@
-var app = angular.module('barnAppAdmin', ['ui.bootstrap','barnNameFilters', 'xeditable', 'ngRoute', 'googlechart']);
+var app = angular.module('barnAppAdmin', ['ui.bootstrap','barnNameFilters', 'xeditable', 'ngRoute', 'googlechart', 'ngCookies']);
 
 
 // xeditable config
@@ -9,10 +9,10 @@ app.run(function(editableOptions) {
 app.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
-        //when('/', {
-        //    templateUrl: base_url+'assets/templates/barn_overview.html',
-        //    controller: 'BarnAvailCtrl'
-        //}).
+        when('/', {
+            templateUrl: base_url+'assets/templates/admin_login.html',
+            controller: 'AdminLoginCtrl'
+        }).
         when('/barns', {
             templateUrl: base_url+'assets/templates/barn_admin.html',
             controller: 'BarnAdminCtrl'
@@ -36,6 +36,27 @@ CONTROLLERS
 ====================
 */
 
+app.controller('AdminLoginCtrl', function($scope, $http, $location, $routeParams, LoginServices, $cookies){
+    console.log("inside AdminLoginCtrl");
+
+    $scope.submit = function(){
+        //alert('h');
+        LoginServices.login($scope.username, $scope.password).success(function(response) {
+            console.log(response);
+            if(response.login == 'success') {
+                $location.path('/barns');
+                $cookies.put('loggedIn', 'true');
+            }
+            else {
+                alert("Wrong Password or username");
+                $cookies.put('loggedIn', 'false');
+            }
+        });
+    }
+
+
+});
+
 app.controller('BarnMapCtrl', function($scope, $http, $location, $routeParams, BarnCompServices, BarnServices){
     console.log("inside BarnMapCtrl");
     var bid = $routeParams.barn_uid;
@@ -51,7 +72,13 @@ app.controller('BarnMapCtrl', function($scope, $http, $location, $routeParams, B
     });
 });
 
-app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices) {
+app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices, $cookies) {
+    //login verify
+    if($cookies.get('loggedIn') != 'true') {
+        $location.path('/');
+        return;
+    }
+
     BarnServices.getBarns().success(function(data) {
         $scope.barns = data;
         console.log($scope.barns);
@@ -92,7 +119,13 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices)
 
 });
 
-app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $routeParams, $uibModal, BarnServices, BarnCompServices) {
+app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $routeParams, $uibModal, BarnServices, BarnCompServices, $cookies) {
+    //login verify
+    if($cookies.get('loggedIn') != 'true') {
+        $location.path('/');
+        return;
+    }
+
     var bid = $routeParams.barn_uid;
 
     // get barn data
@@ -404,34 +437,18 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
  SERVICES
  ====================
  */
-//app.service('compLocServices', function() {
-//    var stringValue = 'test string value';
-//    var objectValue = {
-//        data: 'test object value'
-//    };
-//    var locObj = {
-//        loc_x : 0,
-//        loc_y : 0,
-//        loc_r : 0
-//    }
-//
-//
-//    return {
-//        getString: function() {
-//            return stringValue;
-//        },
-//        setString: function(value) {
-//            stringValue = value;
-//        },
-//        getLocObj: function() {
-//            return locObj;
-//        },
-//        setLocObj: function(obj) {
-//            locObj = obj;
-//        }
-//    }
-//});
 
+app.service('loggedInStatus', function () {
+    var loggedIn = '';
+    return {
+        getStatus: function () {
+            return loggedIn;
+        },
+        setStatus: function (value) {
+            loggedIn = value;
+        }
+    };
+});
 
 /*
  ====================
@@ -475,6 +492,17 @@ app.factory('BarnCompServices', function($http){
             var data = {id: id}
             return $http.post(base_url+'api/deleteComp', data);
         }
+
+    };
+});
+
+app.factory('LoginServices', function($http){
+    return {
+        login:function(username, password) {
+            var data = {id:username, password: password}
+            return $http.post(base_url+'api/auth', data);
+        },
+
 
     };
 });
