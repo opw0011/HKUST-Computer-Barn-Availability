@@ -1,16 +1,15 @@
 <div id="main-container" class="container" ng-controller="BarnAvailCtrl">
     <div class="text-center">
-        <h1 class="text-center">Barn Real-time Usage</h1>
+        <h1 class="text-center"><i class="fa fa-info-circle"></i> Barn Real-time Usage</h1>
         <small><i>Last updated: 1 hour ago</i></small>
     </div>
 
 
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="barn in barns">
-
             <div class="row">
                 <div class="col-sm-2">
-                    <h4>{{barn.barn_name}}</h4>
+                    <h4><i class="fa fa-map-marker"></i> {{barn.barn_name}}</h4>
                 </div>
                 <div class="col-sm-9">
                     <small>Available Seats</small>
@@ -19,14 +18,14 @@
                     </uib-progressbar>
                 </div>
                 <div class="col-sm-1">
-                    <a href="barn#/map/{{barn.barn_id}}">Preview</a>
+                    <a href="barn#/map/{{barn.barn_id}}"><i class="fa fa-eye"></i> View</a>
                 </div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-sm-2">
-                    <h4>Overall</h4>
+                    <h4><i class="fa fa-globe"></i> Overall</h4>
                 </div>
                 <div class="col-sm-9">
                     <small>Available Seats</small>
@@ -41,7 +40,7 @@
         </li>
     </ul>
     <div class="container" ng-controller="BarnOverviewChartCtrl">
-        <h2 class="text-center">Barn Statistics</h2>
+        <h2 class="text-center">  <i class="fa fa-bar-chart"></i> Barn Statistics</h2>
         <div id="chart_div"></div>
         <div google-chart chart="chartObject"></div>
     </div>

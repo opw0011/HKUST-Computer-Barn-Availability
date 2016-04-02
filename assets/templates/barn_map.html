@@ -1,9 +1,9 @@
 <div class="container text-center">
 
-    <h2>{{barn.barn_name}} Availability</h2>
+    <h2><i class="fa fa-desktop"></i> {{barn.barn_name}} Availability</h2>
     <em>{{barn.barn_desc}}</em>
     <br>
-    <small>last updated: 15 minutes ago</small>
+    <small>last updated: <i class="fa fa-clock-o"></i> 15 minutes ago  </small>
 
     <img ng-mapster id="barn-map" ng-src="assets/imgs/barn_map/{{barn.barn_uid}}.PNG" alt="{{barn.barn_name}} Map" usemap="#Map" style="max-width:1000px; margin: 0 auto;"/>
     <map name="Map" id="Map">

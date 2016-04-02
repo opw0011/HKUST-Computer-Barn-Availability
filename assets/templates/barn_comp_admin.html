@@ -112,10 +112,15 @@
                         Your browser does not support the HTML5 canvas tag.
                     </canvas>
                 </div>
-                DEBUG:
-                {{barn}}
-                {{comp}}
+                <!--{{barn}}-->
+                <!--{{comp}}-->
                 X: {{canvas.x}} Y: {{canvas.y}} R: {{canvas.r}}
+                <div>
+                  X<input type="range" ng-model="canvas.x" ng-change="updateCircleWithValue()" max="1200">
+                  Y<input type="range" ng-model="canvas.y" ng-change="updateCircleWithValue()" max="1200">
+                  R<input type="range" ng-model="canvas.r" ng-change="updateCircleWithValue()" max="100">
+                </div>
+
 
             </div>
             <div class="modal-footer">

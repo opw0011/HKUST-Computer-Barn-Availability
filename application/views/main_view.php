@@ -19,14 +19,19 @@
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/main.css') ?>">
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/stacktable.css') ?>">
 		<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/jquery.qtip.min.css') ?>">
+		<!-- google font -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 		<!-- d3js -->
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 	</head>
 	<body >
 
 		<!-- navbar start -->
 
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-custom" role="navigation">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -35,23 +40,25 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="barn/">Barn Availability</a>
+				<a class="navbar-brand" href="barn/"><i class="fa fa-desktop"></i> Barn Availability @ HKUST</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="barn#/map/1000">Barn A</a></li>
-					<li><a href="barn#/map/1001">Barn B</a></li>
-					<li><a href="barn#/map/1002">Barn C</a></li>
-					<li><a href="barn#/map/1003">Barn D</a></li>
+					<li><a href="barn#/map/1000"><i class="fa fa-angle-right"></i> Barn A</a></li>
+					<li><a href="barn#/map/1001"><i class="fa fa-angle-right"></i> Barn B</a></li>
+					<li><a href="barn#/map/1002"><i class="fa fa-angle-right"></i> Barn C</a></li>
+					<li><a href="barn#/map/1003"><i class="fa fa-angle-right"></i> Barn D</a></li>
+					<li><a href="#"><i class="fa fa-angle-right"></i> Barn A Teaching Area</a></li>
+					<li><a href="#"><i class="fa fa-angle-right"></i> Barn C Teaching Area</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<!-- <li><a href="#">Link</a></li> -->
 					<li uib-dropdown on-toggle="toggled(open)">
 						<a href="#" id="simple-dropdown" uib-dropdown-toggle>Settings <b class="caret"></b></a>
 						<ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
-							<li><a href="#" target="_blank">Edit (coming soon...)</a></li>
+							<li><a href="admin#" target="_blank"><i class="fa fa-user-plus"></i> Admin Login</a></li>
 					<!-- 		<li><a href="#">Action2</a></li> -->
 						</ul>
 					</li>

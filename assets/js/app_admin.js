@@ -397,7 +397,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
             }
 
             function drawEllipse(x1, y1, x2, y2) {
-                var radiusX = (x2 - x1),   /// radius for x based on input
+                var radiusX = Math.abs(x2 - x1),   /// radius for x based on input
                     radiusY = radiusX,   /// radius for y based on input
                     centerX = x1,      /// calc center
                     centerY = y1,
@@ -405,10 +405,13 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
                     a = step,                    /// counter
                     pi2 = Math.PI * 2 - step;    /// end angle
 
+
                 //var radiusX = (x2 - x1) * 0.5,   /// radius for x based on input
                 //    radiusY = (y2 - y1) * 0.5,   /// radius for y based on input
                 //    centerX = x1 + radiusX,      /// calc center
                 //    centerY = y1 + radiusY,
+
+                // console.log("drawing %d %s %d %d", centerX, centerY, radiusX, radiusY);
 
                 /// start a new path
                 dCtx.beginPath();
@@ -427,6 +430,28 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
                 dCtx.closePath();
                 dCtx.strokeStyle = '#F00';
                 dCtx.stroke();
+            }
+
+            $scope.updateCircleWithValue = function() {
+                var x = parseInt($scope.canvas.x, 10)
+                var y = parseInt($scope.canvas.y, 10);
+                var r = parseInt($scope.canvas.r, 10);
+
+
+                var rect = dCanvas.getBoundingClientRect();
+                // x1 = e.clientX - rect.left;
+                // y1 = e.clientY - rect.top;
+
+                //x = x - rect.left,
+                //    y = y- rect.top;
+
+                /// clear canvas
+                dCtx.clearRect(0, 0, w, h);
+                // console.log("Update using value: " + x + ' ' + y + ' ' + r);
+
+                /// draw ellipse
+                drawEllipse(x, y, x+r, y+r);
+
             }
         }
     }
