@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" ng-app="barnAppAdmin">
+<html lang="" ng-app="barnAppAdmin" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -67,7 +67,8 @@
 <!--ng-cookies-->
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
 
-
+<!-- ng-file-upload -->
+<script src="assets/js/lib/ng-file-upload-all.min.js"</script>
 
 <script src="assets/js/lib/ng-google-chart.min.js"></script>
 

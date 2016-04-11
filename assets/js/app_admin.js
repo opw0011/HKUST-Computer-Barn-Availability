@@ -1,4 +1,4 @@
-var app = angular.module('barnAppAdmin', ['ui.bootstrap','barnNameFilters', 'xeditable', 'ngRoute', 'googlechart', 'ngCookies']);
+var app = angular.module('barnAppAdmin', ['ui.bootstrap','barnNameFilters', 'xeditable', 'ngRoute', 'ngCookies', 'ngFileUpload']);
 
 
 // xeditable config
@@ -57,6 +57,42 @@ app.controller('AdminLoginCtrl', function($scope, $http, $location, $routeParams
 
 });
 
+app.controller('ImageUploadCtrl', function($scope, $http, $location, Upload, $timeout){
+    console.log("inside ImageUploadCtrl");
+    $scope.uploadFiles = function(file, errFiles) {
+        $scope.f = file;
+        $scope.image = {};
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: 'Upload/do_upload',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    // if success
+                    console.log(response);
+                    file.result = response.data;
+                    // store the upload file info
+                    $scope.image.old_name =file.name;
+                    $scope.image.name = response.data.file_name;
+                });
+            }, function (response) {
+                // if fail to to upload
+                console.log(response);
+                alert(response.data.message);
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 *
+                    evt.loaded / evt.total));
+            });
+        }
+    }
+
+});
+
 app.controller('BarnMapCtrl', function($scope, $http, $location, $routeParams, BarnCompServices, BarnServices){
     console.log("inside BarnMapCtrl");
     var bid = $routeParams.barn_uid;
@@ -73,6 +109,7 @@ app.controller('BarnMapCtrl', function($scope, $http, $location, $routeParams, B
 });
 
 app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices, $cookies, $log) {
+    console.log("inside BarnAdminCtrl");
     //login verify
     if($cookies.get('loggedIn') != 'true') {
         $location.path('/');
@@ -88,7 +125,7 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices,
     $scope.saveBarn = function(data, id) {
         $log.debug(data);
         // validation
-        if(! ( isValid(data.name, "Barn Name") && isValid(data.code, "Barn Code") && isValid(data.desc, "Barn Desc") ) ){
+        if(! ( isValidInput(data.name, "Barn Name") && isValidInput(data.code, "Barn Code") && isValidInput(data.desc, "Barn Desc") ) ){
             return false;
         }
 
@@ -130,22 +167,6 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices,
       // alert(id);
       $location.path('barn/' + id);
     };
-
-    function isValid(input, name) 
-    {
-        if(input == null || input == "")
-        {
-            alert("ERROR: " + name + " cannot be empty");
-            return false;
-        }
-        re = /[^a-zA-Z0-9 ]+/;
-        if (re.test(input))
-        {
-            alert("ERROR: " + name + " cannot contain special characters");
-            return false;
-        }
-        return true;
-    }
 
 });
 
@@ -246,6 +267,10 @@ app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $ro
             x = comp.loc_x,
             y = comp.loc_y,
             r = comp.loc_r;
+        console.log(data);
+        if(! ( isValidInput(data.code, "Computer Code") && isValidInput(data.desc, "Computer Desc")  && isValidInput(comp.loc_r, "Computer Location")) ){
+            return false;
+        }
         if(id == 'New') {
             // append the barn id in the url
             angular.extend(data, {bid: bid});
@@ -585,8 +610,6 @@ app.factory('LoginServices', function($http){
     };
 });
 
-
-
 /*
 ====================
 FILTERS
@@ -695,3 +718,25 @@ app.directive('ngDataQtip', function() {
         }
     };
 });
+
+/*
+ ====================
+ GLOBAL FUNCTION
+ ====================
+ */
+
+function isValidInput(input, name)
+{
+    if(input == null || input == "")
+    {
+        alert("ERROR: " + name + " cannot be empty");
+        return false;
+    }
+    re = /[^a-zA-Z0-9 ]+/;
+    if (re.test(input))
+    {
+        alert("ERROR: " + name + " cannot contain special characters");
+        return false;
+    }
+    return true;
+}
