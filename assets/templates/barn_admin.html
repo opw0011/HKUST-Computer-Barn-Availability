@@ -45,12 +45,12 @@
                 </form>
                 <div class="buttons" ng-show="!barnForm.$visible">
                     <button class="btn btn-primary btn-sm" ng-click="barnForm.$show()">Edit</button>
-                    <button class="btn btn-danger btn-sm" ng-click="removeBarn($index)" ng-disabled="true">Delete</button>
+                    <button class="btn btn-danger btn-sm" ng-click="removeBarn($index, barn.barn_uid)">Delete</button>
                     <button class="btn btn-success btn-sm" ng-click="viewBarnComp(barn.barn_uid)">Manage Computers</button>
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
-    <button class="btn btn-default" ng-click="addBarn()">Add row</button>
+    <button class="btn btn-default" ng-click="addBarn()">New Barn</button>
 </div>

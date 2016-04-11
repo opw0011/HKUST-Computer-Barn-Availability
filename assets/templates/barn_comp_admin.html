@@ -114,11 +114,17 @@
                 </div>
                 <!--{{barn}}-->
                 <!--{{comp}}-->
-                X: {{canvas.x}} Y: {{canvas.y}} R: {{canvas.r}}
+                <div class="container">
+                    <h4>Drag and draw a red circle to represent new postion. </h4>
+                    Green circle represent the original computer position.
+                    <em>*Please note that the image in this page is not responsive, but it will be responsive in the main page</em>
+
+                </div>
                 <div>
                   X<input type="range" ng-model="canvas.x" ng-change="updateCircleWithValue()" max="1200">
                   Y<input type="range" ng-model="canvas.y" ng-change="updateCircleWithValue()" max="1200">
                   R<input type="range" ng-model="canvas.r" ng-change="updateCircleWithValue()" max="100">
+                    Debug << X: {{canvas.x}} Y: {{canvas.y}} R: {{canvas.r}} >>
                 </div>
 
 

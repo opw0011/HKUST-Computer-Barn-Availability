@@ -72,7 +72,7 @@ app.controller('BarnMapCtrl', function($scope, $http, $location, $routeParams, B
     });
 });
 
-app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices, $cookies) {
+app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices, $cookies, $log) {
     //login verify
     if($cookies.get('loggedIn') != 'true') {
         $location.path('/');
@@ -86,6 +86,12 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices,
 
     // update/create barn
     $scope.saveBarn = function(data, id) {
+        $log.debug(data);
+        // validation
+        if(! ( isValid(data.name, "Barn Name") && isValid(data.code, "Barn Code") && isValid(data.desc, "Barn Desc") ) ){
+            return false;
+        }
+
         if(id == 'New') {
             BarnServices.createBarn(data);
             window.location.reload();
@@ -97,8 +103,16 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices,
     };
 
     // remove barn
-    $scope.removeBarn = function(index) {
-        $scope.barns.splice(index, 1);
+    $scope.removeBarn = function(index, id) {
+        // confirm before delte
+        var r = confirm("Confirm Delete? \nPlease note that this action cannot be reverted!");
+        if (r == true) {
+            $scope.barns.splice(index, 1);
+            BarnServices.deleteBarn(id);
+        } else {
+            // no action
+        }
+
     };
 
     // add barn
@@ -116,6 +130,22 @@ app.controller('BarnAdminCtrl', function($scope, $http, $location, BarnServices,
       // alert(id);
       $location.path('barn/' + id);
     };
+
+    function isValid(input, name) 
+    {
+        if(input == null || input == "")
+        {
+            alert("ERROR: " + name + " cannot be empty");
+            return false;
+        }
+        re = /[^a-zA-Z0-9 ]+/;
+        if (re.test(input))
+        {
+            alert("ERROR: " + name + " cannot contain special characters");
+            return false;
+        }
+        return true;
+    }
 
 });
 
@@ -299,10 +329,12 @@ app.controller('BarnCompAdminCtrl', function($scope, $http, $log, $location, $ro
 
 });
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routeParams, comp, barn) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routeParams, $log, comp, barn) {
     $scope.barn = barn;
     $scope.comp = comp;
     $scope.canvas = {};
+
+    $log.debug(comp.loc_x);
 
     $scope.ok = function () {
         // pass back the modified coordinate
@@ -327,8 +359,8 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
 
     // canvas
     $scope.initCanvas = function() {
-        // init bg canvas
 
+        // init bg canvas
         var canvas = document.getElementById("bgCanvas");
         var ctx = canvas.getContext("2d");
         var image = document.getElementById("barn");
@@ -341,6 +373,16 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
             ctx.canvas.height = imgHeight;
             // draw img on canvas
             ctx.drawImage(image, 0, 0);
+
+            // Draw original position of the map
+            ctx.globalAlpha = 0.85;
+            ctx.beginPath();
+            ctx.arc(comp.loc_x, comp.loc_y, comp.loc_r, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'green';
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#003300';
+            ctx.stroke();
 
             initDrawCanvas(imgWidth, imgHeight);
         }
@@ -428,8 +470,15 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$routePa
 
                 /// close it and stroke it for demo
                 dCtx.closePath();
-                dCtx.strokeStyle = '#F00';
+                // dCtx.strokeStyle = '#FB3535';
                 dCtx.stroke();
+                dCtx.globalAlpha = 0.85;
+                dCtx.fillStyle = '#FB3535';
+                dCtx.fill();
+                dCtx.lineWidth = 2;
+                dCtx.strokeStyle = '#A70F0F';
+                dCtx.stroke();
+
             }
 
             $scope.updateCircleWithValue = function() {
@@ -496,6 +545,10 @@ app.factory('BarnServices', function($http){
         },
         createBarn: function(data) {
             return $http.post(base_url+'api/createBarn', data);
+        },
+        deleteBarn: function(id) {
+            var data = {id: id}
+            return $http.post(base_url+'api/deleteBarn', data);
         }
     };
 });
@@ -642,4 +695,3 @@ app.directive('ngDataQtip', function() {
         }
     };
 });
-
